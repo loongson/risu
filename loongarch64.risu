@@ -65,25 +65,29 @@ mulw_d_wu LA64 0000 00000001 11111 rk:5 rj:5 rd:5 \
 # div.w{u}, mod.w[u]  rk, rj, need in [0x0 ~0x7FFFFFFF]
 # use function set_reg_w($reg)
 div_w LA64 0000 00000010 00000 rk:5 rj:5 rd:5 \
-    !constraints { $rk != 2 && $rj != 2 && $rd != 2; } \
+    !constraints { $rk != 2 && $rj != 2 && $rd != 2 && $rk != 0; } \
     !memory { set_reg_w($rj); set_reg_w($rk); }
 div_wu LA64 0000 00000010 00010 rk:5 rj:5 rd:5 \
-    !constraints { $rk != 2 && $rj != 2 && $rd != 2; } \
+    !constraints { $rk != 2 && $rj != 2 && $rd != 2 && $rk != 0; } \
     !memory { set_reg_w($rj); set_reg_w($rk); }
 div_d LA64 0000 00000010 00100 rk:5 rj:5 rd:5 \
-    !constraints { $rk != 2 && $rj != 2 && $rd != 2; }
+    !constraints { $rk != 2 && $rj != 2 && $rd != 2 && $rk !=0; } \
+    !memory { reg_ori_one($rk); }
 div_du LA64 0000 00000010 00110 rk:5 rj:5 rd:5 \
-    !constraints { $rk != 2 && $rj != 2 && $rd != 2; }
+    !constraints { $rk != 2 && $rj != 2 && $rd != 2 && $rk !=0; } \
+    !memory { reg_ori_one($rk); }
 mod_w LA64 0000 00000010 00001 rk:5 rj:5 rd:5 \
-    !constraints { $rk != 2 && $rj != 2 && $rd != 2; } \
+    !constraints { $rk != 2 && $rj != 2 && $rd != 2 && $rk !=0; } \
     !memory { set_reg_w($rj); set_reg_w($rk); }
 mod_wu LA64 0000 00000010 00011 rk:5 rj:5 rd:5 \
-    !constraints { $rk != 2 && $rj != 2 && $rd != 2; } \
+    !constraints { $rk != 2 && $rj != 2 && $rd != 2 && $rk !=0; } \
     !memory { set_reg_w($rj); set_reg_w($rk); }
 mod_d LA64 0000 00000010 00101 rk:5 rj:5 rd:5 \
-    !constraints { $rk != 2 && $rj != 2 && $rd != 2; }
+    !constraints { $rk != 2 && $rj != 2 && $rd != 2 && $rk !=0; } \
+    !memory { reg_ori_one($rk); }
 mod_du LA64 0000 00000010 00111 rk:5 rj:5 rd:5 \
-    !constraints { $rk != 2 && $rj != 2 && $rd != 2; }
+    !constraints { $rk != 2 && $rj != 2 && $rd != 2 && $rk !=0; } \
+    !memory { reg_ori_one($rk); }
 
 alsl_w LA64 0000 00000000 010 sa2:2 rk:5 rj:5 rd:5 \
     !constraints { $rk != 2 && $rj != 2 && $rd != 2; }

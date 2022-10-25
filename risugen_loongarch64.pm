@@ -51,10 +51,20 @@ sub write_set_fcsr($)
 # Global used to communicate between align(x) and reg() etc.
 my $alignment_restriction;
 
+sub reg_ori_one($)
+{
+    my($reg)=@_;
+    # ori reg reg 1
+    insn32(0x03800000 |  1 << 10 | $reg << 5 | $reg);
+    return $reg;
+}
+
 sub set_reg_w($)
 {
     my($reg)=@_;
     # Set reg [0x0, 0x7FFFFFFF]
+
+    reg_ori_one($reg);
 
     # $reg << 33
     # slli.d  $reg, $reg, 33
