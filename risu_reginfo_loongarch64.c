@@ -28,18 +28,6 @@
 const struct option * const arch_long_opts;
 const char * const arch_extra_help;
 
-struct _ctx_layout {
-        struct sctx_info *addr;
-        unsigned int size;
-};
-
-struct extctx_layout {
-        unsigned long size;
-        unsigned int flags;
-        struct _ctx_layout fpu;
-        struct _ctx_layout end;
-};
-
 void process_arch_opt(int opt, const char *arg)
 {
     abort();
@@ -54,40 +42,12 @@ int reginfo_size(struct reginfo *ri)
     return sizeof(*ri);
 }
 
-static int parse_extcontext(struct sigcontext *sc, struct extctx_layout *extctx)
-{
-    uint32_t magic, size;
-    struct sctx_info *info = (struct sctx_info *)&sc->sc_extcontext;
-
-    while(1) {
-        magic = (uint32_t)info->magic;
-        size =  (uint32_t)info->size;
-        switch (magic) {
-        case 0: /* END*/
-            return 0;
-        case FPU_CTX_MAGIC:
-            if (size < (sizeof(struct sctx_info) +
-                        sizeof(struct fpu_context))) {
-                return -1;
-            }
-            extctx->fpu.addr = info;
-            break;
-        default:
-            return -1;
-       }
-       info = (struct sctx_info *)((char *)info +size);
-    }
-    return 0;
-}
-
 /* reginfo_init: initialize with a ucontext */
 void reginfo_init(struct reginfo *ri, ucontext_t *context)
 {
-    int i;
+    int i, j, k;
     struct ucontext *uc = (struct ucontext *)context;
-    struct extctx_layout extctx;
 
-    memset(&extctx, 0, sizeof(struct extctx_layout));
     memset(ri, 0, sizeof(*ri));
 
     for (i = 1; i < 32; i++) {
@@ -95,20 +55,17 @@ void reginfo_init(struct reginfo *ri, ucontext_t *context)
     }
 
     ri->regs[2] = 0xdeadbeefdeadbeef;
-    ri->pc = uc->uc_mcontext.sc_pc - (unsigned long)image_start_address;
+    ri->pc = (unsigned long)uc->uc_mcontext.sc_pc - (unsigned long)image_start_address;
     ri->flags = uc->uc_mcontext.sc_flags;
-    ri->faulting_insn = *(uint32_t *)uc->uc_mcontext.sc_pc;
+    ri->faulting_insn = *((uint32_t *) uc->uc_mcontext.sc_pc);
+    ri->fcc = uc->uc_mcontext.sc_fcc;
+    ri->fcsr = uc->uc_mcontext.sc_fcsr;
 
-    parse_extcontext(&uc->uc_mcontext, &extctx);
-    if (extctx.fpu.addr) {
-        struct sctx_info *info = extctx.fpu.addr;
-        struct fpu_context *fpu_ctx = (struct fpu_context *)((char *)info +
-                                       sizeof(struct sctx_info));
-        for(i = 0; i < 32; i++) {
-	    ri->fpregs[i] = fpu_ctx->regs[i];
+    for (j = 1; j < 32; j++) {
+        /* Save LSX registers */
+        for (k = 0; k < 2; k++) {
+            ri->fpregs[j].val64[k] = uc->uc_mcontext.sc_fpregs[j].val64[k];
         }
-	ri->fcsr = fpu_ctx->fcsr;
-	ri->fcc = fpu_ctx->fcc;
     }
 }
 
@@ -134,7 +91,7 @@ int reginfo_dump(struct reginfo *ri, FILE * f)
     fprintf(f, "  fcsr   : %08x\n", ri->fcsr);
 
     for (i = 0; i < 32; i++) {
-        fprintf(f, "  f%-2d    : %016lx\n", i, ri->fpregs[i]);
+        fprintf(f, "  f%-2d    : %016lx\n", i, ri->fpregs[i].val64[0]);
     }
 
     return !ferror(f);
@@ -173,9 +130,9 @@ int reginfo_dump_mismatch(struct reginfo *m, struct reginfo *a, FILE * f)
     }
 
     for (i = 0; i < 32; i++) {
-        if (m->fpregs[i]!= a->fpregs[i]) {
+        if (m->fpregs[i].val64[0]!= a->fpregs[i].val64[0]) {
             fprintf(f, "  f%-2d    : %016lx vs %016lx\n",
-                    i, m->fpregs[i], a->fpregs[i]);
+                    i, m->fpregs[i].val64[0], a->fpregs[i].val64[0]);
         }
     }
 

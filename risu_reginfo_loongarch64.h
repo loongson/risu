@@ -12,6 +12,8 @@
 #ifndef RISU_REGINFO_LOONGARCH64_H
 #define RISU_REGINFO_LOONGARCH64_H
 
+#define FPU_REG_WIDTH           256
+
 struct reginfo {
     uint64_t regs[32];
     uint64_t pc;
@@ -19,7 +21,10 @@ struct reginfo {
     uint32_t flags;
     uint32_t fcsr;
     uint32_t faulting_insn;
-    uint64_t fpregs[32];
+    union {
+        uint32_t   val32[FPU_REG_WIDTH / 32];
+        uint64_t   val64[FPU_REG_WIDTH / 64];
+    } fpregs[32];
 };
 
 #endif /* RISU_REGINFO_LOONGARCH64_H */
