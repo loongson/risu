@@ -309,6 +309,7 @@ Valid options:
     --no-fp      : disable floating point: no fp init, randomization etc.
                    Useful to test before support for FP is available.
     --sve        : enable sve floating point
+    --lsx        : enabled lsx instructions(LoongArch only)
     --be         : generate instructions in Big-Endian byte order (ppc64 only).
     --help       : print this message
 EOT
@@ -321,6 +322,7 @@ sub main()
     my $fpscr = 0;
     my $fp_enabled = 1;
     my $sve_enabled = 0;
+    my $lsx_enabled = 0;
     my $big_endian = 0;
     my ($infile, $outfile);
 
@@ -339,6 +341,7 @@ sub main()
                 "be" => sub { $big_endian = 1; },
                 "no-fp" => sub { $fp_enabled = 0; },
                 "sve" => sub { $sve_enabled = 1; },
+                "lsx" => sub { $lsx_enabled = 1; },
         ) or return 1;
     # allow "--pattern re,re" and "--pattern re --pattern re"
     @pattern_re = split(/,/,join(',',@pattern_re));
@@ -367,6 +370,7 @@ sub main()
         'numinsns' => $numinsns,
         'fp_enabled' => $fp_enabled,
         'sve_enabled' => $sve_enabled,
+        'lsx_enabled' => $lsx_enabled,
         'outfile' => $outfile,
         'details' => \%insn_details,
         'keys' => \@insn_keys,

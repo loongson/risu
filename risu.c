@@ -437,6 +437,7 @@ static int apprentice(void)
                 image_start_address);
         fprintf(stderr, "starting image\n");
         image_start();
+        reginfo_dump(&ri[APPRENTICE], stderr);
         fprintf(stderr, "image returned unexpectedly\n");
         return EXIT_FAILURE;
 

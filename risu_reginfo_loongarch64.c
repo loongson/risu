@@ -94,6 +94,11 @@ int reginfo_dump(struct reginfo *ri, FILE * f)
         fprintf(f, "  f%-2d    : %016lx\n", i, ri->fpregs[i].val64[0]);
     }
 
+    /* dump LSX */
+    for (i = 0; i < 32; i++) {
+        fprintf(f, "  v%-2d    : {%016lx, %016lx}\n",
+                i, ri->fpregs[i].val64[0], ri->fpregs[i].val64[1]);
+    }
     return !ferror(f);
 }
 
@@ -130,10 +135,20 @@ int reginfo_dump_mismatch(struct reginfo *m, struct reginfo *a, FILE * f)
     }
 
     for (i = 0; i < 32; i++) {
-        if (m->fpregs[i].val64[0]!= a->fpregs[i].val64[0]) {
+        if (m->fpregs[i].val64[0] != a->fpregs[i].val64[0]) {
             fprintf(f, "  f%-2d    : %016lx vs %016lx\n",
                     i, m->fpregs[i].val64[0], a->fpregs[i].val64[0]);
         }
+    }
+
+    /* dump LSX */
+    for (i = 0; i < 32; i++) {
+        if (m->fpregs[i].val64[0] != a->fpregs[i].val64[0] ||
+            m->fpregs[i].val64[1] != a->fpregs[i].val64[1]) {
+            fprintf(f, "  v%-2d    : {%016lx, %016lx} vs {%016lx, %016lx}\n", i,
+                    m->fpregs[i].val64[0], m->fpregs[i].val64[1],
+                    a->fpregs[i].val64[0], m->fpregs[i].val64[1]);
+	}
     }
 
     return !ferror(f);
