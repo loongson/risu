@@ -48,6 +48,15 @@ sub write_set_fcsr($)
     insn32(0x0114c000);
 }
 
+sub write_clean_lsx()
+{
+    # clean LSX registers vreplgr2vr.d vd 0
+    for (my $i = 0; $i < 32; $i++) {
+        # vreplg2vr.d v$i 0
+	insn32(0x729f0c00 | $i);
+    }
+}
+
 # Global used to communicate between align(x) and reg() etc.
 my $alignment_restriction;
 
@@ -496,8 +505,10 @@ sub write_test_code($)
     if (grep { defined($insn_details{$_}->{blocks}->{"memory"}) } @keys) {
         write_memblock_setup();
     }
+
     # Memblock setup doesn't clean its registers, so this must come afterwards.
     write_random_register_data($fp_enabled);
+    write_clean_lsx();
 
     for my $i (1..$numinsns) {
         my $insn_enc = $keys[int rand (@keys)];

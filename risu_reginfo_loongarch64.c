@@ -147,7 +147,7 @@ int reginfo_dump_mismatch(struct reginfo *m, struct reginfo *a, FILE * f)
             m->fpregs[i].val64[1] != a->fpregs[i].val64[1]) {
             fprintf(f, "  v%-2d    : {%016lx, %016lx} vs {%016lx, %016lx}\n", i,
                     m->fpregs[i].val64[0], m->fpregs[i].val64[1],
-                    a->fpregs[i].val64[0], m->fpregs[i].val64[1]);
+                    a->fpregs[i].val64[0], a->fpregs[i].val64[1]);
 	}
     }
 
