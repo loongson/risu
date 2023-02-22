@@ -8,7 +8,7 @@ ARCH=loongarch64 ../configure --static
 make
 
 # rand insn: 
-# ./risugen --numinsn 100000 loongarch.risu test.bin
+# ./risugen --numinsn 100000 loongarch64.risu test.bin
 
 # master : 
 # ./build/risu --master test.bin
@@ -17,4 +17,4 @@ make
 # [./qemu-loongarch ] ./build/risu  --host ip  test.bin
 
 # dump test.bin:
-#  objdump -D -b binary -m loongarch64 gs.bin 2>&1 | tee 1.txt
+#  objdump -D -b binary -m loongarch64 test.bin 2>&1 | tee 1.txt
