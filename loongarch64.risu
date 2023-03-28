@@ -1022,15 +1022,15 @@ vsrarn_w_d LSX 0111 00001111 10111 vk:5 vj:5 vd:5
 vsrlrni_b_h LSX 0111 00110100 01000 1 imm:4 vj:5 vd:5
 vsrlrni_h_w LSX 0111 00110100 01001   imm:5 vj:5 vd:5
 vsrlrni_w_d LSX 0111 00110100 0101    imm:6 vj:5 vd:5
-#vsrlrni_d_q LSX 0111 00110100 011     imm:7 vj:5 vd:5   #128 + 128 too lagre, skip
+vsrlrni_d_q LSX 0111 00110100 011     imm:7 vj:5 vd:5
 vsrarni_b_h LSX 0111 00110101 11000 1 imm:4 vj:5 vd:5
 vsrarni_h_w LSX 0111 00110101 11001   imm:5 vj:5 vd:5
 vsrarni_w_d LSX 0111 00110101 1101    imm:6 vj:5 vd:5
-#vsrarni_d_q LSX 0111 00110101 111     imm:7 vj:5 vd:5  #skip
+vsrarni_d_q LSX 0111 00110101 111     imm:7 vj:5 vd:5
 
 vssrln_b_h LSX 0111 00001111 11001 vk:5 vj:5 vd:5
 vssrln_h_w LSX 0111 00001111 11010 vk:5 vj:5 vd:5
-#vssrln_w_d LSX 0111 00001111 11011 vk:5 vj:5 vd:5  #skip
+vssrln_w_d LSX 0111 00001111 11011 vk:5 vj:5 vd:5
 vssran_b_h LSX 0111 00001111 11101 vk:5 vj:5 vd:5
 vssran_h_w LSX 0111 00001111 11110 vk:5 vj:5 vd:5
 vssran_w_d LSX 0111 00001111 11111 vk:5 vj:5 vd:5
@@ -1043,50 +1043,50 @@ vssran_wu_d LSX 0111 00010000 01111 vk:5 vj:5 vd:5
 
 vssrlni_b_h LSX 0111 00110100 10000 1 imm:4 vj:5 vd:5
 vssrlni_h_w LSX 0111 00110100 10001   imm:5 vj:5 vd:5
-#vssrlni_w_d LSX 0111 00110100 1001    imm:6 vj:5 vd:5 #skip
-#vssrlni_d_q LSX 0111 00110100 101     imm:7 vj:5 vd:5 #skip
+vssrlni_w_d LSX 0111 00110100 1001    imm:6 vj:5 vd:5
+vssrlni_d_q LSX 0111 00110100 101     imm:7 vj:5 vd:5
 vssrani_b_h LSX 0111 00110110 00000 1 imm:4 vj:5 vd:5
 vssrani_h_w LSX 0111 00110110 00001   imm:5 vj:5 vd:5
 vssrani_w_d LSX 0111 00110110 0001    imm:6 vj:5 vd:5
 vssrani_d_q LSX 0111 00110110 001     imm:7 vj:5 vd:5
-#vssrlni_bu_h LSX 0111 00110100 11000 1 imm:4 vj:5 vd:5 #skip
-#vssrlni_hu_w LSX 0111 00110100 11001   imm:5 vj:5 vd:5 #skip
-#vssrlni_wu_d LSX 0111 00110100 1101    imm:6 vj:5 vd:5 #skip
-#vssrlni_du_q LSX 0111 00110100 111     imm:7 vj:5 vd:5 #skip
-#vssrani_bu_h LSX 0111 00110110 01000 1 imm:4 vj:5 vd:5 #skip
-#vssrani_hu_w LSX 0111 00110110 01001   imm:5 vj:5 vd:5 #skip
-#vssrani_wu_d LSX 0111 00110110 0101    imm:6 vj:5 vd:5 #skip
-#vssrani_du_q LSX 0111 00110110 011     imm:7 vj:5 vd:5 #skip
+vssrlni_bu_h LSX 0111 00110100 11000 1 imm:4 vj:5 vd:5
+vssrlni_hu_w LSX 0111 00110100 11001   imm:5 vj:5 vd:5
+vssrlni_wu_d LSX 0111 00110100 1101    imm:6 vj:5 vd:5
+vssrlni_du_q LSX 0111 00110100 111     imm:7 vj:5 vd:5
+vssrani_bu_h LSX 0111 00110110 01000 1 imm:4 vj:5 vd:5
+vssrani_hu_w LSX 0111 00110110 01001   imm:5 vj:5 vd:5
+vssrani_wu_d LSX 0111 00110110 0101    imm:6 vj:5 vd:5
+vssrani_du_q LSX 0111 00110110 011     imm:7 vj:5 vd:5
 
-#vssrlrn_b_h LSX 0111 00010000 00001 vk:5 vj:5 vd:5 # skip
-#vssrlrn_h_w LSX 0111 00010000 00010 vk:5 vj:5 vd:5
-#vssrlrn_w_d LSX 0111 00010000 00011 vk:5 vj:5 vd:5
-#vssrarn_b_h LSX 0111 00010000 00101 vk:5 vj:5 vd:5
-#vssrarn_h_w LSX 0111 00010000 00110 vk:5 vj:5 vd:5
-#vssrarn_w_d LSX 0111 00010000 00111 vk:5 vj:5 vd:5
-#vssrlrn_bu_h LSX 0111 00010000 10001 vk:5 vj:5 vd:5
-#vssrlrn_hu_w LSX 0111 00010000 10010 vk:5 vj:5 vd:5
-#vssrlrn_wu_d LSX 0111 00010000 10011 vk:5 vj:5 vd:5
-#vssrarn_bu_h LSX 0111 00010000 10101 vk:5 vj:5 vd:5
-#vssrarn_hu_w LSX 0111 00010000 10110 vk:5 vj:5 vd:5
-#vssrarn_wu_d LSX 0111 00010000 10111 vk:5 vj:5 vd:5
+vssrlrn_b_h LSX 0111 00010000 00001 vk:5 vj:5 vd:5
+vssrlrn_h_w LSX 0111 00010000 00010 vk:5 vj:5 vd:5
+vssrlrn_w_d LSX 0111 00010000 00011 vk:5 vj:5 vd:5
+vssrarn_b_h LSX 0111 00010000 00101 vk:5 vj:5 vd:5
+vssrarn_h_w LSX 0111 00010000 00110 vk:5 vj:5 vd:5
+vssrarn_w_d LSX 0111 00010000 00111 vk:5 vj:5 vd:5
+vssrlrn_bu_h LSX 0111 00010000 10001 vk:5 vj:5 vd:5
+vssrlrn_hu_w LSX 0111 00010000 10010 vk:5 vj:5 vd:5
+vssrlrn_wu_d LSX 0111 00010000 10011 vk:5 vj:5 vd:5
+vssrarn_bu_h LSX 0111 00010000 10101 vk:5 vj:5 vd:5
+vssrarn_hu_w LSX 0111 00010000 10110 vk:5 vj:5 vd:5
+vssrarn_wu_d LSX 0111 00010000 10111 vk:5 vj:5 vd:5
 
-#vssrlrni_b_h LSX 0111 00110101 00000 1 imm:4 vj:5 vd:5 #skip
-#vssrlrni_h_w LSX 0111 00110101 00001   imm:5 vj:5 vd:5
-#vssrlrni_w_d LSX 0111 00110101 0001    imm:6 vj:5 vd:5
-#vssrlrni_d_q LSX 0111 00110101 001     imm:7 vj:5 vd:5
-#vssrarni_b_h LSX 0111 00110110 10000 1 imm:4 vj:5 vd:5
-#vssrarni_h_w LSX 0111 00110110 10001   imm:5 vj:5 vd:5
-#vssrarni_w_d LSX 0111 00110110 1001    imm:6 vj:5 vd:5
-#vssrarni_d_q LSX 0111 00110110 101     imm:7 vj:5 vd:5
-#vssrlrni_bu_h LSX 0111 00110101 01000 1 imm:4 vj:5 vd:5
-#vssrlrni_hu_w LSX 0111 00110101 01001   imm:5 vj:5 vd:5
-#vssrlrni_wu_d LSX 0111 00110101 0101    imm:6 vj:5 vd:5
-#vssrlrni_du_q LSX 0111 00110101 011     imm:7 vj:5 vd:5
-#vssrarni_bu_h LSX 0111 00110110 11000 1 imm:4 vj:5 vd:5
-#vssrarni_hu_w LSX 0111 00110110 11001   imm:5 vj:5 vd:5
-#vssrarni_wu_d LSX 0111 00110110 1101    imm:6 vj:5 vd:5
-#vssrarni_du_q LSX 0111 00110110 111     imm:7 vj:5 vd:5
+vssrlrni_b_h LSX 0111 00110101 00000 1 imm:4 vj:5 vd:5
+vssrlrni_h_w LSX 0111 00110101 00001   imm:5 vj:5 vd:5
+vssrlrni_w_d LSX 0111 00110101 0001    imm:6 vj:5 vd:5
+vssrlrni_d_q LSX 0111 00110101 001     imm:7 vj:5 vd:5
+vssrarni_b_h LSX 0111 00110110 10000 1 imm:4 vj:5 vd:5
+vssrarni_h_w LSX 0111 00110110 10001   imm:5 vj:5 vd:5
+vssrarni_w_d LSX 0111 00110110 1001    imm:6 vj:5 vd:5
+vssrarni_d_q LSX 0111 00110110 101     imm:7 vj:5 vd:5
+vssrlrni_bu_h LSX 0111 00110101 01000 1 imm:4 vj:5 vd:5
+vssrlrni_hu_w LSX 0111 00110101 01001   imm:5 vj:5 vd:5
+vssrlrni_wu_d LSX 0111 00110101 0101    imm:6 vj:5 vd:5
+vssrlrni_du_q LSX 0111 00110101 011     imm:7 vj:5 vd:5
+vssrarni_bu_h LSX 0111 00110110 11000 1 imm:4 vj:5 vd:5
+vssrarni_hu_w LSX 0111 00110110 11001   imm:5 vj:5 vd:5
+vssrarni_wu_d LSX 0111 00110110 1101    imm:6 vj:5 vd:5
+vssrarni_du_q LSX 0111 00110110 111     imm:7 vj:5 vd:5
 
 vclo_b LSX 0111 00101001 11000 00000 vj:5 vd:5
 vclo_h LSX 0111 00101001 11000 00001 vj:5 vd:5
@@ -1160,74 +1160,74 @@ vfmaxa_d LSX 0111 00010100 00010 vk:5 vj:5 vd:5
 vfmina_s LSX 0111 00010100 00101 vk:5 vj:5 vd:5
 vfmina_d LSX 0111 00010100 00110 vk:5 vj:5 vd:5
 
-#vflogb_s LSX 0111 00101001 11001 10001 vj:5 vd:5 #skip fcsr CAUSE field incorrect
-#vflogb_d LSX 0111 00101001 11001 10010 vj:5 vd:5
+vflogb_s LSX 0111 00101001 11001 10001 vj:5 vd:5
+vflogb_d LSX 0111 00101001 11001 10010 vj:5 vd:5
 
 vfclass_s LSX 0111 00101001 11001 10101 vj:5 vd:5
 vfclass_d LSX 0111 00101001 11001 10110 vj:5 vd:5
 
-#vfsqrt_s LSX 0111 00101001 11001 11001 vj:5 vd:5  #skip fcsr CAUSE field incorrect
-#vfsqrt_d LSX 0111 00101001 11001 11010 vj:5 vd:5
-#vfrecip_s LSX 0111 00101001 11001 11101 vj:5 vd:5
-#vfrecip_d LSX 0111 00101001 11001 11110 vj:5 vd:5
-#vfrsqrt_s LSX 0111 00101001 11010 00001 vj:5 vd:5
-#vfrsqrt_d LSX 0111 00101001 11010 00010 vj:5 vd:5
+vfsqrt_s LSX 0111 00101001 11001 11001 vj:5 vd:5
+vfsqrt_d LSX 0111 00101001 11001 11010 vj:5 vd:5
+vfrecip_s LSX 0111 00101001 11001 11101 vj:5 vd:5
+vfrecip_d LSX 0111 00101001 11001 11110 vj:5 vd:5
+vfrsqrt_s LSX 0111 00101001 11010 00001 vj:5 vd:5
+vfrsqrt_d LSX 0111 00101001 11010 00010 vj:5 vd:5
 
-#vfcvtl_s_h LSX 0111 00101001 11011 11010 vj:5 vd:5 #skip fcsr CAUSE field incorrect
-#vfcvth_s_h LSX 0111 00101001 11011 11011 vj:5 vd:5
-#vfcvtl_d_s LSX 0111 00101001 11011 11100 vj:5 vd:5
-#vfcvth_d_s LSX 0111 00101001 11011 11101 vj:5 vd:5
+vfcvtl_s_h LSX 0111 00101001 11011 11010 vj:5 vd:5
+vfcvth_s_h LSX 0111 00101001 11011 11011 vj:5 vd:5
+vfcvtl_d_s LSX 0111 00101001 11011 11100 vj:5 vd:5
+vfcvth_d_s LSX 0111 00101001 11011 11101 vj:5 vd:5
 vfcvt_h_s LSX 0111 00010100 01100 vk:5 vj:5 vd:5
 vfcvt_s_d LSX 0111 00010100 01101 vk:5 vj:5 vd:5
 
-#vfrint_s LSX 0111 00101001 11010 01101 vj:5 vd:5   # skip fcsr CAUSE field incorrect
-#vfrint_d LSX 0111 00101001 11010 01110 vj:5 vd:5
-#vfrintrm_s LSX 0111 00101001 11010 10001 vj:5 vd:5
-#vfrintrm_d LSX 0111 00101001 11010 10010 vj:5 vd:5
-#vfrintrp_s LSX 0111 00101001 11010 10101 vj:5 vd:5
-#vfrintrp_d LSX 0111 00101001 11010 10110 vj:5 vd:5
-#vfrintrz_s LSX 0111 00101001 11010 11001 vj:5 vd:5
-#vfrintrz_d LSX 0111 00101001 11010 11010 vj:5 vd:5
-#vfrintrne_s LSX 0111 00101001 11010 11101 vj:5 vd:5
-#vfrintrne_d LSX 0111 00101001 11010 11110 vj:5 vd:5
+vfrint_s LSX 0111 00101001 11010 01101 vj:5 vd:5
+vfrint_d LSX 0111 00101001 11010 01110 vj:5 vd:5
+vfrintrm_s LSX 0111 00101001 11010 10001 vj:5 vd:5
+vfrintrm_d LSX 0111 00101001 11010 10010 vj:5 vd:5
+vfrintrp_s LSX 0111 00101001 11010 10101 vj:5 vd:5
+vfrintrp_d LSX 0111 00101001 11010 10110 vj:5 vd:5
+vfrintrz_s LSX 0111 00101001 11010 11001 vj:5 vd:5
+vfrintrz_d LSX 0111 00101001 11010 11010 vj:5 vd:5
+vfrintrne_s LSX 0111 00101001 11010 11101 vj:5 vd:5
+vfrintrne_d LSX 0111 00101001 11010 11110 vj:5 vd:5
 
-#vftint_w_s LSX 0111 00101001 11100 01100 vj:5 vd:5     #skip fcsr CAUSE incorrect
-#vftint_l_d LSX 0111 00101001 11100 01101 vj:5 vd:5
-#vftintrm_w_s LSX 0111 00101001 11100 01110 vj:5 vd:5
-#vftintrm_l_d LSX 0111 00101001 11100 01111 vj:5 vd:5
-#vftintrp_w_s LSX 0111 00101001 11100 10000 vj:5 vd:5
-#vftintrp_l_d LSX 0111 00101001 11100 10001 vj:5 vd:5
-#vftintrz_w_s LSX 0111 00101001 11100 10010 vj:5 vd:5
-#vftintrz_l_d LSX 0111 00101001 11100 10011 vj:5 vd:5
-#vftintrne_w_s LSX 0111 00101001 11100 10100 vj:5 vd:5
-#vftintrne_l_d LSX 0111 00101001 11100 10101 vj:5 vd:5
-#vftint_wu_s LSX 0111 00101001 11100 10110 vj:5 vd:5
-#vftint_lu_d LSX 0111 00101001 11100 10111 vj:5 vd:5
-#vftintrz_wu_s LSX 0111 00101001 11100 11100 vj:5 vd:5
-#vftintrz_lu_d LSX 0111 00101001 11100 11101 vj:5 vd:5
-#vftint_w_d LSX 0111 00010100 10011 vk:5 vj:5 vd:5
-#vftintrm_w_d LSX 0111 00010100 10100 vk:5 vj:5 vd:5
-#vftintrp_w_d LSX 0111 00010100 10101 vk:5 vj:5 vd:5
-#vftintrz_w_d LSX 0111 00010100 10110 vk:5 vj:5 vd:5
-#vftintrne_w_d LSX 0111 00010100 10111 vk:5 vj:5 vd:5
-#vftintl_l_s LSX 0111 00101001 11101 00000 vj:5 vd:5
-#vftinth_l_s LSX 0111 00101001 11101 00001 vj:5 vd:5
-#vftintrml_l_s LSX 0111 00101001 11101 00010 vj:5 vd:5
-#vftintrmh_l_s LSX 0111 00101001 11101 00011 vj:5 vd:5
-#vftintrpl_l_s LSX 0111 00101001 11101 00100 vj:5 vd:5
-#vftintrph_l_s LSX 0111 00101001 11101 00101 vj:5 vd:5
-#vftintrzl_l_s LSX 0111 00101001 11101 00110 vj:5 vd:5
-#vftintrzh_l_s LSX 0111 00101001 11101 00111 vj:5 vd:5
-#vftintrnel_l_s LSX 0111 00101001 11101 01000 vj:5 vd:5
-#vftintrneh_l_s LSX 0111 00101001 11101 01001 vj:5 vd:5
+vftint_w_s LSX 0111 00101001 11100 01100 vj:5 vd:5
+vftint_l_d LSX 0111 00101001 11100 01101 vj:5 vd:5
+vftintrm_w_s LSX 0111 00101001 11100 01110 vj:5 vd:5
+vftintrm_l_d LSX 0111 00101001 11100 01111 vj:5 vd:5
+vftintrp_w_s LSX 0111 00101001 11100 10000 vj:5 vd:5
+vftintrp_l_d LSX 0111 00101001 11100 10001 vj:5 vd:5
+vftintrz_w_s LSX 0111 00101001 11100 10010 vj:5 vd:5
+vftintrz_l_d LSX 0111 00101001 11100 10011 vj:5 vd:5
+vftintrne_w_s LSX 0111 00101001 11100 10100 vj:5 vd:5
+vftintrne_l_d LSX 0111 00101001 11100 10101 vj:5 vd:5
+vftint_wu_s LSX 0111 00101001 11100 10110 vj:5 vd:5
+vftint_lu_d LSX 0111 00101001 11100 10111 vj:5 vd:5
+vftintrz_wu_s LSX 0111 00101001 11100 11100 vj:5 vd:5
+vftintrz_lu_d LSX 0111 00101001 11100 11101 vj:5 vd:5
+vftint_w_d LSX 0111 00010100 10011 vk:5 vj:5 vd:5
+vftintrm_w_d LSX 0111 00010100 10100 vk:5 vj:5 vd:5
+vftintrp_w_d LSX 0111 00010100 10101 vk:5 vj:5 vd:5
+vftintrz_w_d LSX 0111 00010100 10110 vk:5 vj:5 vd:5
+vftintrne_w_d LSX 0111 00010100 10111 vk:5 vj:5 vd:5
+vftintl_l_s LSX 0111 00101001 11101 00000 vj:5 vd:5
+vftinth_l_s LSX 0111 00101001 11101 00001 vj:5 vd:5
+vftintrml_l_s LSX 0111 00101001 11101 00010 vj:5 vd:5
+vftintrmh_l_s LSX 0111 00101001 11101 00011 vj:5 vd:5
+vftintrpl_l_s LSX 0111 00101001 11101 00100 vj:5 vd:5
+vftintrph_l_s LSX 0111 00101001 11101 00101 vj:5 vd:5
+vftintrzl_l_s LSX 0111 00101001 11101 00110 vj:5 vd:5
+vftintrzh_l_s LSX 0111 00101001 11101 00111 vj:5 vd:5
+vftintrnel_l_s LSX 0111 00101001 11101 01000 vj:5 vd:5
+vftintrneh_l_s LSX 0111 00101001 11101 01001 vj:5 vd:5
 
-#vffint_s_w LSX 0111 00101001 11100 00000 vj:5 vd:5   # skip fcsr field incorrect
-#vffint_s_wu LSX 0111 00101001 11100 00001 vj:5 vd:5
-#vffint_d_l LSX 0111 00101001 11100 00010 vj:5 vd:5
-#vffint_d_lu LSX 0111 00101001 11100 00011 vj:5 vd:5
-#vffintl_d_w LSX 0111 00101001 11100 00100 vj:5 vd:5
-#vffinth_d_w LSX 0111 00101001 11100 00101 vj:5 vd:5
-#vffint_s_l LSX 0111 00010100 10000 vk:5 vj:5 vd:5
+vffint_s_w LSX 0111 00101001 11100 00000 vj:5 vd:5
+vffint_s_wu LSX 0111 00101001 11100 00001 vj:5 vd:5
+vffint_d_l LSX 0111 00101001 11100 00010 vj:5 vd:5
+vffint_d_lu LSX 0111 00101001 11100 00011 vj:5 vd:5
+vffintl_d_w LSX 0111 00101001 11100 00100 vj:5 vd:5
+vffinth_d_w LSX 0111 00101001 11100 00101 vj:5 vd:5
+vffint_s_l LSX 0111 00010100 10000 vk:5 vj:5 vd:5
 
 vseq_b LSX 0111 00000000 00000 vk:5 vj:5 vd:5
 vseq_h LSX 0111 00000000 00001 vk:5 vj:5 vd:5
@@ -1272,10 +1272,11 @@ vslti_hu LSX 0111 00101000 10001 imm:5 vj:5 vd:5
 vslti_wu LSX 0111 00101000 10010 imm:5 vj:5 vd:5
 vslti_du LSX 0111 00101000 10011 imm:5 vj:5 vd:5
 
-#vfcmp_cond_s LSX 0000 11000101 cond:5 vk:5 vj:5 00 cd:3 \ # skip fcsr CAUSE field incorrect
-#    !constraints { $cond > 0 && $cond < 0x12; }
-#vfcmp_cond_d LSX 0000 11000110 cond:5 vk:5 vj:5 00 cd:3 \
-#    !constraints { $cond > 0 && $cond < 0x12; }
+vfcmp_cond_s LSX 0000 11000101 cond:5 vk:5 vj:5 00 cd:3 \
+    !constraints { $cond > 0 && $cond < 0x12; }
+
+vfcmp_cond_d LSX 0000 11000110 cond:5 vk:5 vj:5 00 cd:3 \
+    !constraints { $cond > 0 && $cond < 0x12; }
 
 vbitsel_v LSX 0000 11010001 va:5 vk:5 vj:5 vd:5
 
@@ -1351,7 +1352,7 @@ vpackod_b LSX 0111 00010001 10000 vk:5 vj:5 vd:5
 vpackod_h LSX 0111 00010001 10001 vk:5 vj:5 vd:5
 vpackod_w LSX 0111 00010001 10010 vk:5 vj:5 vd:5
 vpackod_d LSX 0111 00010001 10011 vk:5 vj:5 vd:5
-
+#
 vpickev_b LSX 0111 00010001 11100 vk:5 vj:5 vd:5
 vpickev_h LSX 0111 00010001 11101 vk:5 vj:5 vd:5
 vpickev_w LSX 0111 00010001 11110 vk:5 vj:5 vd:5
@@ -1370,17 +1371,17 @@ vilvh_h LSX 0111 00010001 11001 vk:5 vj:5 vd:5
 vilvh_w LSX 0111 00010001 11010 vk:5 vj:5 vd:5
 vilvh_d LSX 0111 00010001 11011 vk:5 vj:5 vd:5
 
-#vshuf_b LSX 0000 11010101 va:5 vk:5 vj:5 vd:5   #skip some insns failed
-#vshuf_h LSX 0111 00010111 10101 vk:5 vj:5 vd:5
-#vshuf_w LSX 0111 00010111 10110 vk:5 vj:5 vd:5
-#vshuf_d LSX 0111 00010111 10111 vk:5 vj:5 vd:5
+vshuf_b LSX 0000 11010101 va:5 vk:5 vj:5 vd:5
+vshuf_h LSX 0111 00010111 10101 vk:5 vj:5 vd:5
+vshuf_w LSX 0111 00010111 10110 vk:5 vj:5 vd:5
+vshuf_d LSX 0111 00010111 10111 vk:5 vj:5 vd:5
 vshuf4i_b LSX 0111 00111001 00 imm:8 vj:5 vd:5
 vshuf4i_h LSX 0111 00111001 01 imm:8 vj:5 vd:5
 vshuf4i_w LSX 0111 00111001 10 imm:8 vj:5 vd:5
-#vshuf4i_d LSX 0111 00111001 11 imm:8 vj:5 vd:5 #skip some insns failed
+vshuf4i_d LSX 0111 00111001 11 imm:8 vj:5 vd:5
 
-#vpermi_w LSX 0111 00111110 01 imm:8 vj:5 vd:5 #skip some insns failed
-
+vpermi_w LSX 0111 00111110 01 imm:8 vj:5 vd:5
+#
 vextrins_d LSX 0111 00111000 00 imm:8 vj:5 vd:5
 vextrins_w LSX 0111 00111000 01 imm:8 vj:5 vd:5
 vextrins_h LSX 0111 00111000 10 imm:8 vj:5 vd:5
@@ -1425,4 +1426,5 @@ vstelm_b LSX 0011 000110     si4:4 si8:8 rj:5 vd:5 \
     !constraints { $rj != 0 && $rj != 2; } \
     !memory { reg_plus_imm($rj, sextract($si8, 8)); }
 
-#vldi LSX 0111 00111110 00 si13:13 vd:5 # skip si13 < 0  incorrect
+vldi LSX 0111 00111110 00 si13:13 vd:5 \
+     !constraints { $si13 >= 0 && $si13 <= 12; }
