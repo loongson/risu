@@ -62,8 +62,8 @@ void reginfo_init(struct reginfo *ri, ucontext_t *context)
     ri->fcsr = uc->uc_mcontext.sc_fcsr;
 
     for (j = 1; j < 32; j++) {
-        /* Save LSX registers */
-        for (k = 0; k < 2; k++) {
+        /* Save LASX registers */
+        for (k = 0; k < 4; k++) {
             ri->fpregs[j].val64[k] = uc->uc_mcontext.sc_fpregs[j].val64[k];
         }
     }
@@ -99,6 +99,14 @@ int reginfo_dump(struct reginfo *ri, FILE * f)
         fprintf(f, "  v%-2d    : {%016lx, %016lx}\n",
                 i, ri->fpregs[i].val64[0], ri->fpregs[i].val64[1]);
     }
+
+    /* dump LASX */
+    for (i = 0; i < 32; i++) {
+        fprintf(f, " x%-2d    : {%016lx, %016lx, %016lx, %016lx}\n", i,
+                ri->fpregs[i].val64[0], ri->fpregs[i].val64[1],
+                ri->fpregs[i].val64[2], ri->fpregs[i].val64[3]);
+    }
+
     return !ferror(f);
 }
 
@@ -149,6 +157,21 @@ int reginfo_dump_mismatch(struct reginfo *m, struct reginfo *a, FILE * f)
                     m->fpregs[i].val64[0], m->fpregs[i].val64[1],
                     a->fpregs[i].val64[0], a->fpregs[i].val64[1]);
 	}
+    }
+
+    /* dump LASX */
+    for (i = 0; i < 32; i++) {
+        if (m->fpregs[i].val64[0] != a->fpregs[i].val64[0] ||
+            m->fpregs[i].val64[1] != a->fpregs[i].val64[1] ||
+            m->fpregs[i].val64[2] != a->fpregs[i].val64[2] ||
+            m->fpregs[i].val64[3] != a->fpregs[i].val64[3]) {
+            fprintf(f, "  x%-2d    : {%016lx, %016lx, %016lx, %016lx} vs"
+                       " {%016lx, %016lx, %016lx, %016lx}\n", i,
+                    m->fpregs[i].val64[0], m->fpregs[i].val64[1],
+                    m->fpregs[i].val64[2], m->fpregs[i].val64[3],
+                    a->fpregs[i].val64[0], a->fpregs[i].val64[1],
+                    a->fpregs[i].val64[2], a->fpregs[i].val64[3]);
+        }
     }
 
     return !ferror(f);

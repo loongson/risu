@@ -57,6 +57,15 @@ sub write_clean_lsx()
     }
 }
 
+sub wirte_clean_lasx()
+{
+    # write LSX registers xvreplgr2vr.d xd 0
+    for(my $i = 0; $i < 32; $i++ ) {
+        # xvreplg2vr.d v$i 0
+        insn32(0x769f0c00 | $i);
+    }
+}
+
 # Global used to communicate between align(x) and reg() etc.
 my $alignment_restriction;
 
@@ -509,6 +518,7 @@ sub write_test_code($)
     # Memblock setup doesn't clean its registers, so this must come afterwards.
     write_random_register_data($fp_enabled);
     write_clean_lsx();
+    wirte_clean_lasx();
 
     for my $i (1..$numinsns) {
         my $insn_enc = $keys[int rand (@keys)];
