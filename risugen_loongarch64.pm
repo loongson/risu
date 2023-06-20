@@ -109,6 +109,32 @@ sub nanbox_s($)
     return $fpreg;
 }
 
+#sub clean_la64($)
+#{
+#    my ($reg) = @_;
+#
+#    # xvinsgr2vr.d  xd, r0, 1;
+#    insn32(0x76ebe000 | 0x1 << 10 | $reg);
+#    # xvinsgr2vr.d  xd, r0, 2;
+#    insn32(0x76ebe000 | 0x2 << 10 | $reg);
+#    # xvinsgr2vr.d  xd, r0, 3;
+#    insn32(0x76ebe000 | 0x3 << 10 | $reg);
+#
+#    return $reg;
+#}
+
+sub clean_lsx($)
+{
+    my ($xreg) = @_;
+
+    # xvinsgr2vr.d xd, r0, 2;
+    insn32(0x76ebe000 | 2 << 10 | $xreg);
+    # xvinsgr2vr.d xd, r0, 3;
+    insn32(0x76ebe000 | 3 << 10 | $xreg);
+
+    return $xreg;
+}
+
 sub align($)
 {
     my ($a) = @_;
@@ -423,6 +449,7 @@ sub gen_one_insn($$)
         my $constraint = $rec->{blocks}{"constraints"};
         my $memblock = $rec->{blocks}{"memory"};
         my $safefloat = $rec->{blocks}{"safefloat"};
+        my $clean = $rec->{blocks}{"clean"};
 
         $insn &= ~$fixedbitmask;
         $insn |= $fixedbits;
@@ -453,7 +480,7 @@ sub gen_one_insn($$)
             # number of the base register.
             # Default alignment requirement for ARM is 4 bytes,
             # we use 16 for Aarch64, although often unnecessary and overkill.
-            align(16);
+            align(32);
             $basereg = eval_with_fields($insnname, $insn, $rec, "memory", $memblock);
         }
 
@@ -465,6 +492,21 @@ sub gen_one_insn($$)
             my $resultreg;
             $resultreg = eval_with_fields($insnname, $insn, $rec, "safefloat", $safefloat);
         }
+
+        if (defined $clean) {
+            # la64 insns clean high 192 bit.
+	    # lsx insns clean high 128 bit.
+            # so we use clean_la64() and clean_lsx() make sure that high bit is 0x0;
+            my $cleanreg;
+            $cleanreg = eval_with_fields($insnname, $insn, $rec, "clean", $clean);
+        }
+
+	#if (defined $clean_lsx) {
+        #    # lsx insns clean high 128 bit
+        #    # so we use clean_lsx() make sure that high 128bit is 0x0;
+        #    my $resultreg;
+        #    $resultreg = eval_with_fields($insnname, $insn, $rec, "clean_lsx", $sclean_lsx);
+        #}
 
         if (defined $memblock) {
             # Clean up following a memory access instruction:
