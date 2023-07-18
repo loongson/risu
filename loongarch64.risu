@@ -1850,11 +1850,13 @@ vslti_wu LSX 0111 00101000 10010 imm:5 vj:5 vd:5 \
 vslti_du LSX 0111 00101000 10011 imm:5 vj:5 vd:5 \
     !clean { clean_lsx($vd); }
 
-vfcmp_cond_s LSX 0000 11000101 cond:5 vk:5 vj:5 00 cd:3 \
-    !constraints { $cond > 0 && $cond < 0x12; }
+vfcmp_cond_s LSX 0000 11000101 cond:5 vk:5 vj:5 vd:5 \
+    !constraints { $cond > 0 && $cond < 0x12; } \
+    !clean { clean_lsx($vd); }
 
-vfcmp_cond_d LSX 0000 11000110 cond:5 vk:5 vj:5 00 cd:3 \
-    !constraints { $cond > 0 && $cond < 0x12; }
+vfcmp_cond_d LSX 0000 11000110 cond:5 vk:5 vj:5 vd:5 \
+    !constraints { $cond > 0 && $cond < 0x12; } \
+    !clean { clean_lsx($vd); }
 
 vbitsel_v LSX 0000 11010001 va:5 vk:5 vj:5 vd:5 \
     !clean { clean_lsx($vd); }
@@ -1993,14 +1995,22 @@ vilvh_w LSX 0111 00010001 11010 vk:5 vj:5 vd:5 \
 vilvh_d LSX 0111 00010001 11011 vk:5 vj:5 vd:5 \
     !clean { clean_lsx($vd); }
 
-#vshuf_b LSX 0000 11010101 va:5 vk:5 vj:5 vd:5
-#vshuf_h LSX 0111 00010111 10101 vk:5 vj:5 vd:5
-#vshuf_w LSX 0111 00010111 10110 vk:5 vj:5 vd:5
-#vshuf_d LSX 0111 00010111 10111 vk:5 vj:5 vd:5
-#vshuf4i_b LSX 0111 00111001 00 imm:8 vj:5 vd:5
-#vshuf4i_h LSX 0111 00111001 01 imm:8 vj:5 vd:5
-#vshuf4i_w LSX 0111 00111001 10 imm:8 vj:5 vd:5
-#vshuf4i_d LSX 0111 00111001 11 imm:8 vj:5 vd:5
+vshuf_b LSX 0000 11010101 va:5 vk:5 vj:5 vd:5 \
+    !clean { clean_lsx($vd); }
+vshuf_h LSX 0111 00010111 10101 vk:5 vj:5 vd:5 \
+    !clean { clean_lsx($vd); }
+vshuf_w LSX 0111 00010111 10110 vk:5 vj:5 vd:5 \
+    !clean { clean_lsx($vd); }
+vshuf_d LSX 0111 00010111 10111 vk:5 vj:5 vd:5 \
+    !clean { clean_lsx($vd); }
+vshuf4i_b LSX 0111 00111001 00 imm:8 vj:5 vd:5 \
+    !clean { clean_lsx($vd); }
+vshuf4i_h LSX 0111 00111001 01 imm:8 vj:5 vd:5 \
+    !clean { clean_lsx($vd); }
+vshuf4i_w LSX 0111 00111001 10 imm:8 vj:5 vd:5 \
+    !clean { clean_lsx($vd); }
+vshuf4i_d LSX 0111 00111001 11 imm:8 vj:5 vd:5 \
+    !clean { clean_lsx($vd); }
 
 vpermi_w LSX 0111 00111110 01 imm:8 vj:5 vd:5 \
     !clean { clean_lsx($vd); }
@@ -2741,9 +2751,9 @@ xvslti_hu LASX 0111 01101000 10001 imm:5 xj:5 xd:5
 xvslti_wu LASX 0111 01101000 10010 imm:5 xj:5 xd:5
 xvslti_du LASX 0111 01101000 10011 imm:5 xj:5 xd:5
 
-xvfcmp_cond_s LASX 0000 11001001 cond:5 xk:5 xj:5 00 cd:3 \
+xvfcmp_cond_s LASX 0000 11001001 cond:5 xk:5 xj:5 vd:5 \
     !constraints { $cond > 0 && $cond < 0x12; }
-xvfcmp_cond_d LASX 0000 11001010 cond:5 xk:5 xj:5 00 cd:3 \
+xvfcmp_cond_d LASX 0000 11001010 cond:5 xk:5 xj:5 vd:5 \
     !constraints { $cond > 0 && $cond < 0x12; }
 
 xvbitsel_v LASX 0000 11010010  xa:5 xk:5 xj:5 xd:5
@@ -2825,13 +2835,10 @@ xvilvh_h LASX 0111 01010001 11001 xk:5 xj:5 xd:5
 xvilvh_w LASX 0111 01010001 11010 xk:5 xj:5 xd:5
 xvilvh_d LASX 0111 01010001 11011 xk:5 xj:5 xd:5
 
-#xvshuf_b LASX 0000 11010110 xa:5 xk:5 xj:5 xd:5  # xd & 0xc0 ? 0
-#xvshuf_h LASX 0111 01010111 10101 xk:5 xj:5 xd:5 #\
-##    !constraints { $xd != $xj && $xd != $xk}
-#xvshuf_w LASX 0111 01010111 10110 xk:5 xj:5 xd:5 #\
-##    !constraints { $xd != $xj && $xd != $xk}
-#xvshuf_d LASX 0111 01010111 10111 xk:5 xj:5 xd:5 #\
-##    !constraints { $xd != $xj && $xd != $xk}
+xvshuf_b LASX 0000 11010110 xa:5 xk:5 xj:5 xd:5  # 5000  xd & 0xc0 ? 0
+xvshuf_h LASX 0111 01010111 10101 xk:5 xj:5 xd:5 #\
+xvshuf_w LASX 0111 01010111 10110 xk:5 xj:5 xd:5 #\
+xvshuf_d LASX 0111 01010111 10111 xk:5 xj:5 xd:5 #\
 
 xvperm_w LASX 0111 01010111 11010 xk:5 xj:5 xd:5
 
@@ -2842,7 +2849,7 @@ xvshuf4i_d LASX 0111 01111001 11 imm:8 xj:5 xd:5
 
 xvpermi_w LASX 0111 01111110 01 imm:8 xj:5 xd:5
 xvpermi_d LASX 0111 01111110 10 imm:8 xj:5 xd:5
-#xvpermi_q LASX 0111 01111110 11 imm:8 xj:5 xd:5  4, 8 bit为1 置0
+xvpermi_q LASX 0111 01111110 11 imm:8 xj:5 xd:5 # 5000 , 4, 8 bit为1 置0
 
 xvextrins_d LASX 0111 01111000 00 imm:8 xj:5 xd:5
 xvextrins_w LASX 0111 01111000 01 imm:8 xj:5 xd:5
