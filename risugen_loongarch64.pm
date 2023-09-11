@@ -403,6 +403,21 @@ sub write_random_regdata()
     }
 }
 
+sub write_random_loongarch64_lasxdata()
+{
+    write_random_loongarch64_fpdata();
+
+    # write random LASX data
+    for (my $i = 0; $i < 32; $i++) {
+        my $tmp_reg = 6;
+        # fi is lasx register initial val.
+        # movfr2gr.d r6 fi
+        insn32(0x114b800 | $i << 5 | $tmp_reg);
+        # xvreplgr2vr_d  $i r6
+        insn32(0x769f0c00 | 6 << 5 | $i);
+    }
+}
+
 sub write_random_register_data($)
 {
     my ($fp_enabled) = @_;
@@ -425,11 +440,12 @@ sub write_random_register_data($)
     # movgr2cf $fcc7, $zero
     insn32(0x114d807);
 
-    if ($fp_enabled) {
-        # Load floating point registers
-        write_random_loongarch64_fpdata();
-    }
+    #if ($fp_enabled) {
+    #    # Load floating point registers
+    #    write_random_loongarch64_fpdata();
+    #}
 
+    write_random_loongarch64_lasxdata();
     write_random_regdata();
     write_risuop($OP_COMPARE);
 }
@@ -559,8 +575,6 @@ sub write_test_code($)
 
     # Memblock setup doesn't clean its registers, so this must come afterwards.
     write_random_register_data($fp_enabled);
-    write_clean_lsx();
-    wirte_clean_lasx();
 
     for my $i (1..$numinsns) {
         my $insn_enc = $keys[int rand (@keys)];
