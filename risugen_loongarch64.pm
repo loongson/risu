@@ -81,6 +81,18 @@ sub nanbox_s($)
     return $fpreg;
 }
 
+sub clean_lsx_result($)
+{
+    my ($vreg) = @_;
+
+    # xvinsgr2vr.d vd, r0, 2;
+    insn32(0x76ebe000 | 2 << 10 | $vreg);
+    # xvinsgr2vr.d vd, r0, 3;
+    insn32(0x76ebe000 | 3 << 10 | $vreg);
+
+    return $vreg;
+}
+
 sub align($)
 {
     my ($a) = @_;
@@ -405,6 +417,7 @@ sub gen_one_insn($$)
         my $constraint = $rec->{blocks}{"constraints"};
         my $memblock = $rec->{blocks}{"memory"};
         my $safefloat = $rec->{blocks}{"safefloat"};
+        my $clean = $rec->{blocks}{"clean"};
 
         $insn &= ~$fixedbitmask;
         $insn |= $fixedbits;
@@ -446,6 +459,13 @@ sub gen_one_insn($$)
             # so we use nanbox_s() make sure that high 32bit is 0xffffffff;
             my $resultreg;
             $resultreg = eval_with_fields($insnname, $insn, $rec, "safefloat", $safefloat);
+        }
+
+        if (defined $clean) {
+            # LSX insns only care about low 128 bit,
+            # so we use clean_lsx_result() make sure that high 128bit is 0x0;
+            my $cleanreg;
+            $cleanreg = eval_with_fields($insnname, $insn, $rec, "clean", $clean);
         }
 
         if (defined $memblock) {
